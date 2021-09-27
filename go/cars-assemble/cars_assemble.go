@@ -11,7 +11,7 @@ func CalculateProductionRatePerHour(speed int) float64 {
 // CalculateProductionRatePerMinute describes how many working items are
 // produced by the assembly line every minute
 func CalculateProductionRatePerMinute(speed int) int {
-	return int(productionAtSpeedOne * float64(speed) * successRate(speed) / 60)
+	return int(CalculateProductionRatePerHour(speed)) / 60
 }
 
 // successRate is used to calculate the ratio of an item being created without
@@ -19,9 +19,9 @@ func CalculateProductionRatePerMinute(speed int) int {
 func successRate(speed int) float64 {
 	if speed == 0 {
 		return 0
-	} else if speed >= 1 && speed <= 4 {
+	} else if speed < 5 {
 		return 1
-	} else if speed >= 5 && speed <= 8 {
+	} else if speed < 9 {
 		return 0.9
 	} else {
 		return 0.77
